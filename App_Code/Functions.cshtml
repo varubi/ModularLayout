@@ -1,0 +1,18 @@
+﻿@using System.Web.Mvc;
+@using System.Text;
+@functions {
+    public string FunctionString = "Initiated";
+    public static HtmlString OrderedList(IEnumerable<string> items)
+    {
+        var sb = new StringBuilder();
+        var orderedList = new TagBuilder("ol");
+        foreach (var item in items)
+        {
+            var listItem = new TagBuilder("li");
+            listItem.SetInnerText(item);
+            sb.AppendLine(listItem.ToString(TagRenderMode.Normal));
+        }
+        orderedList.InnerHtml = sb.ToString();
+        return new HtmlString(orderedList.ToString(TagRenderMode.Normal));
+    }
+} 

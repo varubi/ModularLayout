@@ -1,0 +1,70 @@
+﻿@inherits ModularLayout.WebViewPage
+@{
+    if (!String.IsNullOrEmpty(Request["ASYNC_EVENT"]))
+    {
+        ThisRequest.RenderableRequests(Request["ASYNC_EVENT"]);       
+
+            foreach (RenderElement Element in ThisRequest.RenderElements)
+            {
+                switch (Element.Type.ToLower())
+                {
+                    case "section":
+                        if (IsSectionDefined(Element.Name))
+                        {
+                            ThisRequest.AJAX.Add(ThisRequest.PageType + "_" + Element.Name, @RenderSection(Element.Name).ToString());
+                        }
+                        ThisRequest.RenderedSection(Element.Name);
+                        break;
+                }
+            }
+            foreach (string section in ThisRequest.RemainingSections)
+            {
+                WriteTo(TextWriter.Null, @RenderSection(section));
+            }
+        
+            @Html.Raw(Json.Encode(ThisRequest.AJAX))
+
+
+            }
+            else
+            {
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Local Test</title>
+            <link href="~/style/style.css" rel="stylesheet" />
+            <script src="~/script/script.js"></script>
+            @RenderSection("head", required: false)
+        </head>
+        <body>
+            @RenderPage("Views\\ContentPage.cshtml")
+            @{
+                foreach (RenderElement Element in ThisRequest.RenderElements)
+                {
+                    switch (Element.Type.ToLower())
+                    {
+                        case "section":
+                            if (IsSectionDefined(Element.Name))
+                            {
+                                @Html.Raw("<article id=\"" + ThisRequest.PageType + "_" + Element.Name + "\">");
+                                @RenderSection(Element.Name, false);
+                                @Html.Raw("</article>");
+                            }
+                            ThisRequest.RenderedSection(Element.Name);
+                            break;
+                        case "html":
+                            @Html.Raw(Element.Arguments)
+                            break;
+                    }
+                }
+                foreach (string section in ThisRequest.RemainingSections)
+                {
+                    WriteTo(TextWriter.Null, @RenderSection(section));
+                }
+            }
+        </body>
+    </html>
+                }
+}
+
+ 

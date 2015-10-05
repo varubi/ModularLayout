@@ -1,0 +1,24 @@
+﻿@using System.Web.Mvc;
+@using System.Text;
+@functions {
+    private  List<string> _RunOnce = new List<string>();
+    private int _LoadCounter = 0;
+
+    public  bool HasRunOnce(string MethodName)
+    {
+        return (_RunOnce.Contains(MethodName));
+    }
+    public void RunOnceExecuted(string MethodName)
+    {
+        _RunOnce.Add(MethodName);
+    }
+    public string GetLoadCount()
+    {
+        return "Page has loaded " + _LoadCounter.ToString() + " times";
+    }
+    public void CountPageLoad()
+    {
+        _LoadCounter++;
+    }
+
+}

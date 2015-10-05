@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Layout Editor</title>
+    <link rel="stylesheet" type="text/css" href="./include_LayoutEditor/style.css">
+    <script type="text/javascript" src="./include_LayoutEditor/script.js"> </script>
+</head>
+<body>
+    <div id="demo">
+        <div id="layout-items">
+            <div class="header">Layout Items</div>
+            <div data-allowed-elements="section">
+                <div class="element-section" data-element-type="section" data-element-name="section1">Section 1</div>
+                <div class="element-section" data-element-type="section" data-element-name="section2">Section 2</div>
+                <div class="element-section" data-element-type="section" data-element-name="section3">Section 3</div>
+                <div class="element-section" data-element-type="section" data-element-name="section4">Section 4</div>
+            </div>
+            <div data-allowed-elements="">
+                <div class="element-action" data-element-type="action">Action 1</div>
+                <div class="element-action" data-element-type="action">Action 2</div>
+                <div class="element-action" data-element-type="action">Action 3</div>
+                <div class="element-action" data-element-type="action">Action 4</div>
+            </div>
+            <div data-allowed-elements="">
+                <div class="element-partial" data-element-type="partial">Partial 1</div>
+                <div class="element-partial" data-element-type="partial">Partial 2</div>
+                <div class="element-partial" data-element-type="partial">Partial 3</div>
+                <div class="element-partial" data-element-type="partial">Partial 4</div>
+                <div class="element-partial" data-element-type="partial">Partial 5</div>
+            </div>
+            <div data-allowed-elements="">
+                <div class="element-html" data-element-type="HTML" data-element-name="html">
+                    HTML
+                </div>
+            </div>
+        </div>
+        <div id="layout-editor">
+            <div class="header">Layout Editor</div>
+            <div id="layout-elements" data-allowed-elements="all">
+                <div id="initial-holder">Please drag new items into here</div>
+            </div>
+            <button onclick="updatePage()" id="UpdateButton">Update</button>
+        </div>
+
+    </div>
+
+</body>
+</html>

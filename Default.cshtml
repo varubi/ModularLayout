@@ -1,0 +1,90 @@
+﻿@inherits ModularLayout.WebViewPage
+@{ 
+    ThisRequest.GetLayout("Default");
+    Layout = "_Layout.cshtml";
+}
+@functions {
+    public string stuff()
+    {
+        return System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.ToString() + "." + System.Reflection.MethodBase.GetCurrentMethod().Name;
+    }
+    public string randInt()
+    {
+        Random random = new Random();
+        int randomNumber = random.Next(100, 400);
+        return randomNumber.ToString();
+    }
+
+}
+@section section1{
+    @if (ThisRequest.SectionRequired("section1"))
+    {
+        <div class="container">
+            <div class="header">Section 1</div>
+            <div class="content">
+                <div class="updateContainer">
+                    <div>Updates on</div>
+                    <span>SEARCH_CHANGE</span>
+                </div>
+                <div style="color: red;">Created at: @DateTime.Now.ToString("h:mm:ss tt")</div>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mauris nunc, laoreet at nulla sodales, luctus consectetur sem. Cras sit amet velit vitae massa euismod tincidunt in eget metus. Maecenas nunc dolor, ultricies sit amet imperdiet id, dignissim ut enim. Morbi quis aliquam ligula. Nunc et quam porta, porttitor mi ac, hendrerit sem. Pellentesque egestas purus tellus, ut ullamcorper arcu cursus non. Donec eget est vehicula, tincidunt turpis ac, varius massa. Phasellus dapibus vitae nunc et sollicitudin. Sed et magna sapien. Nunc bibendum fermentum cursus. Quisque convallis metus ut lacus ornare malesuada. Ut velit lacus, venenatis eget massa feugiat, fermentum interdum lectus. Proin a gravida urna. Nullam nec metus massa. Integer vel augue sed lectus bibendum euismod eu at purus. Curabitur facilisis feugiat dolor id dictum.
+            </div>
+        </div>
+
+    }
+}
+
+@section section2{
+    @if (ThisRequest.SectionRequired("section2"))
+    {
+        <div class="container">
+            <div class="header">Section 2</div>
+            <div class="content">
+                <div class="updateContainer">
+                    <div>Updates on</div>
+                    <span>CONTACT_SUBMIT</span>
+                </div>
+                @if (!String.IsNullOrEmpty(Request["firstName"]) | !String.IsNullOrEmpty(Request["lastName"]))
+                {
+                <div>
+                    Hello @Request["firstName"] @Request["lastName"]
+                </div>
+                }
+                <form action="/" method="post">
+                    <input type="text" name="firstName" value="@Request["firstName"]" placeholder="First Name" />
+                    <input type="text" name="lastName" value="@Request["lastName"]" placeholder="Last Name" />
+                    <input type="submit" name="submit" value="Submit" onclick="contact_submit(this.parentNode);return false"/>
+                </form>
+            </div>
+        </div>
+    }
+}
+@section section3{
+    @if (ThisRequest.SectionRequired("section3"))
+    {
+        <div class="container">
+            <div class="header">Section 3</div>
+            <div class="content">
+                <div class="updateContainer">
+                    <div>Updates on</div>
+                    <span>CONTACT_SUBMIT</span>
+                    <span>SEARCH_CHANGE</span>
+                </div>
+                <img src="http://www.fillmurray.com/@randInt()/@randInt()">
+            </div>
+        </div>
+    }
+}
+@section section4{
+    @if (ThisRequest.SectionRequired("section4"))
+    {
+        <div class="container">
+            <div class="header">Section 4</div>
+            <div class="content">
+                <button onclick="async_update('SEARCH_CHANGE')">SEARCH_CHANGE</button>
+                <button onclick="async_update('CONTACT_SUBMIT')">CONTACT_SUBMIT</button>
+            </div>
+        </div>
+
+    }
+}
